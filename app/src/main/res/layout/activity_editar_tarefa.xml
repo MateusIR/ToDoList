@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/txtTitulo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingBottom="16dp"
+        android:text="Editar Tarefa"
+        android:textColor="#ffffff"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btnVoltarHome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Voltar"
+        android:layout_marginBottom="8dp" />
+
+    <EditText
+        android:id="@+id/edtEditarNome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nome da tarefa"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#AAAAAA"
+        android:backgroundTint="#FFFFFF"/>
+
+    <EditText
+        android:id="@+id/edtEditarDescricao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Descrição"
+        android:maxLength="256"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#AAAAAA"
+        android:backgroundTint="#FFFFFF"/>
+
+    <EditText
+        android:id="@+id/edtEditarPrazo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Prazo"
+        android:focusable="false"
+        android:clickable="true"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#AAAAAA"
+        android:backgroundTint="#FFFFFF"/>
+
+    <Button
+        android:id="@+id/btnSalvarEdicao"
+        android:text="Salvar"
+        android:layout_width="match_parent"
+        android:backgroundTint="#4CAF50"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

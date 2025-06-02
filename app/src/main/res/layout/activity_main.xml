@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#000000">
+
+    <TextView
+        android:id="@+id/txtTitulo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingBottom="16dp"
+        android:text="To-Do List"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"/>
+
+    <EditText
+        android:id="@+id/edtNome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nome da tarefa"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#AAAAAA"
+        android:backgroundTint="#FFFFFF"/>
+
+    <EditText
+        android:id="@+id/edtDescricao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Descrição"
+        android:maxLength="256"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#AAAAAA"
+        android:backgroundTint="#FFFFFF"/>
+
+    <EditText
+        android:id="@+id/edtPrazo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Prazo"
+        android:focusable="false"
+        android:clickable="true"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#AAAAAA"
+        android:backgroundTint="#FFFFFF"/>
+
+    <Button
+        android:id="@+id/btnInserir"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Inserir"
+        android:textSize="18dp"
+        android:backgroundTint="#4CAF50"
+        android:textColor="#FFFFFF"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Próximas tarefas:"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF" />
+
+    <LinearLayout
+        android:id="@+id/layoutTarefas"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical" />
+
+    <Button
+        android:id="@+id/btnTodasTarefas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ver todas as tarefas"
+        android:textSize="18dp"
+        android:backgroundTint="#ADD8E6"
+        android:textColor="#000000"/>
+</LinearLayout>
