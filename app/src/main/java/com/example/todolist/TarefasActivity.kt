@@ -42,12 +42,10 @@ class TarefasActivity : AppCompatActivity() {
             },
             onAtualizar = {
                 carregarTodasTarefas()
+
             }
         )
     }
-
-
-
 
     override fun onResume() {
         super.onResume()

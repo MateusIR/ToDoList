@@ -18,7 +18,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var banco: DBHelper
     private lateinit var layoutTarefas: LinearLayout
-    private lateinit var editarTarefaLauncher: ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,14 +48,7 @@ class MainActivity : AppCompatActivity() {
             datePickerDialog.show()
         }
 
-        // ao salvar edicao da tarefa, atualiza as tarefas carregadas.
-        editarTarefaLauncher = registerForActivityResult(
-            ActivityResultContracts.StartActivityForResult()
-        ) {
-            if (it.resultCode == RESULT_OK) {
-                carregarTarefas()
-            }
-        }
+
 
         botaoInserir.setOnClickListener {
             banco.inserirTarefa(nome.text.toString(), prazo.text.toString(), descricao.text.toString())
@@ -71,6 +63,10 @@ class MainActivity : AppCompatActivity() {
         carregarTarefas()
     }
 
+    override fun onResume() {
+        super.onResume()
+        carregarTarefas()
+    }
 
 
     private fun carregarTarefas() {
@@ -84,7 +80,7 @@ class MainActivity : AppCompatActivity() {
             onEditar = { tarefa ->
                 val intent = Intent(this, EditarTarefaActivity::class.java)
                 intent.putExtra("id", tarefa.id)
-                editarTarefaLauncher.launch(intent)
+                startActivity(intent)
             },
             onAtualizar = {
                 carregarTarefas()
