@@ -39,7 +39,6 @@ class EditarTarefaActivity : AppCompatActivity() {
                 edtPrazo.setText(formattedDate)
             }, year, month, day)
 
-            // Bloqueia datas anteriores à hoje
             datePickerDialog.datePicker.minDate = c.timeInMillis
             datePickerDialog.show()
         }

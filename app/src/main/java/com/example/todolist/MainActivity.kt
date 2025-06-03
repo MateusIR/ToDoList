@@ -49,60 +49,48 @@ class MainActivity : AppCompatActivity() {
             datePickerDialog.show()
         }
 
-
-
-        // ao salvar edicao na tarefa, atualiza a home para ela ser carregada.
+        // ao salvar edicao da tarefa, atualiza as tarefas carregadas.
         editarTarefaLauncher = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
         ) {
             if (it.resultCode == RESULT_OK) {
-                atualizarTarefas()
+                carregarTarefas()
             }
         }
 
         botaoInserir.setOnClickListener {
             banco.inserirTarefa(nome.text.toString(), prazo.text.toString(), descricao.text.toString())
             nome.text.clear(); prazo.text.clear(); descricao.text.clear()
-            atualizarTarefas()
+            carregarTarefas()
         }
 
         botaoTodas.setOnClickListener {
             startActivity(Intent(this, TarefasActivity::class.java))
         }
 
-        atualizarTarefas()
+        carregarTarefas()
     }
 
-    private fun atualizarTarefas() {
-            layoutTarefas.removeAllViews()
-            val tarefas = banco.obterTop3PorPrazo()
-            val sdfInput = java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault())
-            val sdfOutput = java.text.SimpleDateFormat("dd-MM-yyyy", java.util.Locale.getDefault())
 
-            tarefas.forEach { tarefa ->
-                val view = layoutInflater.inflate(R.layout.item_tarefa, null)
-                view.findViewById<TextView>(R.id.txtNome).text = tarefa.nome
-                view.findViewById<TextView>(R.id.txtDescricao).text = tarefa.descricao
 
-                val prazoFormatado = try {
-                    sdfOutput.format(sdfInput.parse(tarefa.prazo)!!)
-                } catch (e: Exception) {
-                    tarefa.prazo
-                }
-                view.findViewById<TextView>(R.id.txtPrazo).text = prazoFormatado
+    private fun carregarTarefas() {
+        val tarefas = banco.obterTop3PorPrazo()
 
-            view.findViewById<Button>(R.id.btnEditar).setOnClickListener {
+        TarefaHelper.exibirTarefas(
+            layoutInflater = layoutInflater,
+            tarefas = tarefas,
+            layout = layoutTarefas,
+            banco = banco,
+            onEditar = { tarefa ->
                 val intent = Intent(this, EditarTarefaActivity::class.java)
                 intent.putExtra("id", tarefa.id)
                 editarTarefaLauncher.launch(intent)
+            },
+            onAtualizar = {
+                carregarTarefas()
             }
-
-            view.findViewById<Button>(R.id.btnExcluir).setOnClickListener {
-                banco.deletarTarefa(tarefa.id)
-                atualizarTarefas()
-            }
-
-            layoutTarefas.addView(view)
-        }
+        )
     }
+
+
 }

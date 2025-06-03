@@ -24,49 +24,33 @@ class TarefasActivity : AppCompatActivity() {
         btnVoltar.setOnClickListener {
             finish()
         }
-        carregarTarefas()
+        carregarTodasTarefas()
     }
 
-    private fun carregarTarefas() {
-        layoutTodasTarefas.removeAllViews()
+    private fun carregarTodasTarefas() {
         val tarefas = banco.obterTarefas()
 
-        // Conversores de data
-        val sdfInput = java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault())
-        val sdfOutput = java.text.SimpleDateFormat("dd-MM-yyyy", java.util.Locale.getDefault())
-
-        tarefas.forEach { tarefa ->
-            val view = layoutInflater.inflate(R.layout.item_tarefa, null)
-            view.findViewById<TextView>(R.id.txtNome).text = tarefa.nome
-            view.findViewById<TextView>(R.id.txtDescricao).text = tarefa.descricao
-
-            // Formatar data de exibição
-            val prazoFormatado = try {
-                sdfOutput.format(sdfInput.parse(tarefa.prazo)!!)
-            } catch (e: Exception) {
-                tarefa.prazo // fallback caso erro
-            }
-
-            view.findViewById<TextView>(R.id.txtPrazo).text = prazoFormatado
-
-            view.findViewById<Button>(R.id.btnEditar).setOnClickListener {
+        TarefaHelper.exibirTarefas(
+            layoutInflater = layoutInflater,
+            tarefas = tarefas,
+            layout = layoutTodasTarefas,
+            banco = banco,
+            onEditar = { tarefa ->
                 val intent = Intent(this, EditarTarefaActivity::class.java)
                 intent.putExtra("id", tarefa.id)
                 startActivity(intent)
+            },
+            onAtualizar = {
+                carregarTodasTarefas()
             }
-
-            view.findViewById<Button>(R.id.btnExcluir).setOnClickListener {
-                banco.deletarTarefa(tarefa.id)
-                carregarTarefas()
-            }
-
-            layoutTodasTarefas.addView(view)
-        }
+        )
     }
+
+
 
 
     override fun onResume() {
         super.onResume()
-        carregarTarefas()
+        carregarTodasTarefas()
     }
 }
