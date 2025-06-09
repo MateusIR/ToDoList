@@ -15,7 +15,7 @@ Aplicativo Android simples para gerenciamento de tarefas, desenvolvido em **Kotl
 
 ##  Estrutura de Telas
 
-O app é composto por **3 telas principais**:
+O app é composto por **3 telas**:
 
 ###  Tela Inicial
 - Permite adicionar novas tarefas
